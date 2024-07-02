@@ -26,36 +26,52 @@ Basic usage:
 For more information, please refer to the documentation.
 """
 
-# Version of the dynamo_wrapper package
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
-# Import main classes and functions
 from .client import DynamoClient
 from .table import DynamoTable
-from .exceptions import ItemNotFoundError
+from .exceptions import *
 
-# Define what should be imported when using "from dynamo_wrapper import *"
-__all__ = ['DynamoClient', 'DynamoTable', 'ItemNotFoundError']
+__all__ = [
+    'DynamoClient',
+    'DynamoTable',
+    'DynamoWrapperException',
+    'ConnectionError',
+    'ConfigurationError',
+    'TableNotFoundError',
+    'ItemNotFoundError',
+    'ValidationError',
+    'QueryError',
+    'UpdateError',
+    'DeleteError',
+    'InsertError',
+    'IndexError',
+    'CapacityExceededError',
+    'TransactionError',
+    'ConditionCheckFailedError',
+    'ResourceInUseError',
+    'ResourceNotFoundError',
+    'ThrottlingError',
+    'LimitExceededError',
+    'ProvisionedThroughputExceededError',
+    'ConditionalCheckFailedException',
+    'BatchWriteError',
+    'SerializationError',
+    'DeserializationError'
+]
 
-# You can also add any initialization code here if needed
-
-# For example, you might want to set up logging:
 import logging
 
 logging.getLogger(__name__).addHandler(logging.NullHandler())
 
-# Or you could set default configurations:
-DEFAULT_REGION = 'us-west-2'
 
 def set_default_region(region):
     global DEFAULT_REGION
     DEFAULT_REGION = region
 
-# You could also include utility functions here:
+
 def format_condition(condition):
     """Utility function to format filter conditions"""
     if isinstance(condition, tuple) and len(condition) == 2:
         return {'ComparisonOperator': condition[0], 'AttributeValueList': [condition[1]]}
     raise ValueError("Invalid condition format. Expected a tuple (operator, value)")
-
-# Add any other initialization code or utility functions as needed
